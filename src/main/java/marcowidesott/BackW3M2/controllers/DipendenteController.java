@@ -5,6 +5,7 @@ import marcowidesott.BackW3M2.services.DipendenteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -53,5 +54,11 @@ public class DipendenteController {
             @RequestParam("file") MultipartFile file) {
         dipendenteService.uploadFotoProfilo(dipendenteId, file);
         return ResponseEntity.ok("Foto caricata con successo");
+    }
+
+    @PreAuthorize("hasRole('ADMIN')")
+    @GetMapping("/dashboard")
+    public String adminDashboard() {
+        return "Accesso consentito solo agli amministratori";
     }
 }

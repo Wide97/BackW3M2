@@ -20,6 +20,7 @@ public class Dipendente {
     private String cognome;
     private String email;
     private String fotoProfilo;
+    private String password;
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "dipendente_roles",
@@ -29,11 +30,12 @@ public class Dipendente {
     private Set<Role> roles;
 
 
-    public Dipendente(String email, String cognome, String nome, String username, String fotoProfilo) {
+    public Dipendente(String email, String cognome, String nome, String username, String fotoProfilo, String password) {
         this.email = email;
         this.cognome = cognome;
         this.nome = nome;
         this.username = username;
         this.fotoProfilo = fotoProfilo;
+        this.password = password;
     }
 }
