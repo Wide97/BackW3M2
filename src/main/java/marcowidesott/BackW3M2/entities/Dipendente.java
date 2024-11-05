@@ -1,12 +1,11 @@
 package marcowidesott.BackW3M2.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.Set;
 
 @Entity
 @Setter
@@ -21,6 +20,14 @@ public class Dipendente {
     private String cognome;
     private String email;
     private String fotoProfilo;
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "dipendente_roles",
+            joinColumns = @JoinColumn(name = "dipendente_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id")
+    )
+    private Set<Role> roles;
+
 
     public Dipendente(String email, String cognome, String nome, String username, String fotoProfilo) {
         this.email = email;
